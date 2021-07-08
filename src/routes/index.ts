@@ -8,3 +8,6 @@ router.use("/categories", categoriesRoutes);
 router.use("/specifications", specificationsRoutes);
 
 export { router }
+
+
+

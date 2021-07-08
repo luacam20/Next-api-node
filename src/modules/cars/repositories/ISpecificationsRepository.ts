@@ -1,5 +1,3 @@
-//Interface criada, agora vamos criar nossa classe de repository 
-
 import { Specification } from "../model/Specification";
 
 interface ICreateSpecificationDTO {
@@ -8,9 +6,9 @@ interface ICreateSpecificationDTO {
 }
 
 interface ISpecificationsRepository {
-    create({ description, name }: ICreateSpecificationDTO): void;
-    findByName(name: string) : Specification;
+    create({description, name}: ICreateSpecificationDTO): void;
+
+    findByName(name: string): Specification;
 }
 
-//Exprtando interface
-export {ISpecificationsRepository, ICreateSpecificationDTO}
+export { ISpecificationsRepository, ICreateSpecificationDTO }

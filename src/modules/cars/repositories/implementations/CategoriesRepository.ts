@@ -1,13 +1,12 @@
+import { Category } from "../../model/Category"
 import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository";
-import { Category } from "../../model/Category";
 
-class CategoriesRepository implements ICategoriesRepository  {
-    //Array
+
+class CategoriesRepository implements ICategoriesRepository {
     private categories: Category[];
 
-    private static INSTANCE: CategoriesRepository;
+    private static INSTANCE: CategoriesRepository
 
-    //Quando nosso repositorio for inicializado 
     private constructor() {
         this.categories = [];
     }
@@ -16,34 +15,29 @@ class CategoriesRepository implements ICategoriesRepository  {
         if(!CategoriesRepository.INSTANCE){
             CategoriesRepository.INSTANCE = new CategoriesRepository();
         }
-         return CategoriesRepository.INSTANCE;
+        return CategoriesRepository.INSTANCE;
     }
 
-    //Responsavel por cadastrar a nossa categoria na tabela fake no array
-    //void é que não retorna nada 
     create({ description, name }: ICreateCategoryDTO): void {
         const category = new Category();
-     
-        Object.assign(category, {
-        name,
-        description,
-        created_at: new Date(),
-    });
 
-    this.categories.push(category);
-    } 
-    
-    //Listando categorias do nosso array 
+        Object.assign(category, {
+            name, 
+            description,
+            created_at: new Date()
+        })
+           
+        this.categories.push(category);    
+    }
+
     list(): Category[] {
         return this.categories;
     }
 
-    //impedindo cadastro de categoria duplicada 
-    //name do tipo string que retorna um objeto do tipo category
     findByName(name: string): Category {
         const category = this.categories.find(category => category.name === name);
-        return category;
+        return category;    
     }
 }
 
-export { CategoriesRepository }
+export { CategoriesRepository };

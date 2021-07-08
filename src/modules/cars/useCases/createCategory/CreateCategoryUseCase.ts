@@ -1,25 +1,23 @@
-import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
+import { ICategoriesRepository } from "modules/cars/repositories/ICategoriesRepository";
 
 interface IRequest {
     name: string;
     description: string;
 }
 
-//Criar uma categoria e fazer a regra de negocio 
 class CreateCategoryUseCase {
-    
-    //Principo de inversao de dependencia 
     constructor(private categoriesRepository: ICategoriesRepository) {}
-    
-    execute({ description, name }: IRequest): void {
+
+    execute({name, description}: IRequest): void {  
+        
         const categoryAlreadyExists = this.categoriesRepository.findByName(name);
 
         if(categoryAlreadyExists) {
-            throw new Error("Category alredy exists!");
+             throw new Error("Category Already Exists!");
         }
     
-        this.categoriesRepository.create({ name, description });
+        this.categoriesRepository.create({ name, description }); 
     }
 }
 
-export { CreateCategoryUseCase }; 
+export { CreateCategoryUseCase }

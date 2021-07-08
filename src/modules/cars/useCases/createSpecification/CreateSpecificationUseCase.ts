@@ -1,6 +1,5 @@
-//Criando nosso service de especificação
+import { ISpecificationsRepository } from "modules/cars/repositories/ISpecificationsRepository";
 
-import { ISpecificationsRepository } from "../../repositories/ISpecificationsRepository";
 
 interface IRequest {
     name: string;
@@ -9,18 +8,19 @@ interface IRequest {
 
 class CreateSpecificationUseCase {
     constructor(private specificationsRepository: ISpecificationsRepository) {}
-    
+
     execute({name, description}: IRequest): void {
         const specificationAlreadyExists = this.specificationsRepository.findByName(name);
+
         if(specificationAlreadyExists) {
             throw new Error("Specification already exists!");
         }
 
-        this.specificationsRepository.create({
-            name,
+        this.specificationsRepository.create({ 
+            name, 
             description
         });
     }
-} 
+}
 
-export { CreateSpecificationUseCase };
+export { CreateSpecificationUseCase }
